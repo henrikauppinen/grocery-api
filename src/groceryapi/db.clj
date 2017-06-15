@@ -1,7 +1,7 @@
 (ns groceryapi.db
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as sql] [environ.core :refer [env]]))
 
-(def spec "postgresql://postgres:jepa@localhost:5432/postgres")
+(def database-url (env :database-url))
 
 (defn catalog []
-  (into [] (sql/query spec ["select * from catalog"])))
+  (into [] (sql/query database-url ["select * from catalog"])))
